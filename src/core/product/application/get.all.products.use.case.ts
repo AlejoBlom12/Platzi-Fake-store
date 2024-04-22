@@ -1,4 +1,4 @@
-import { IProductRepository } from "../domain/product.repository.model";
+import { IProductRepository } from '../domain/product.repository.model'
 
 export const getAllProductsUseCase = (repository: IProductRepository) =>
-  repository.getAllProducts;
+  repository.getAllProducts

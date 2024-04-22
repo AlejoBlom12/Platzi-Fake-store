@@ -1,4 +1,4 @@
 export interface IUpdateProductRequest {
-  title?: string;
-  price?: number;
+  title?: string
+  price?: number
 }

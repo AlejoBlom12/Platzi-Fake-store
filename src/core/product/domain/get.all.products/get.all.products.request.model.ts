@@ -1,1 +1,1 @@
-export type IGetAllProductsRequest = [];
+export type IGetAllProductsRequest = []

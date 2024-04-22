@@ -1,27 +1,32 @@
-import { useEffect, useState } from "react";
-import { useCategoryStore } from "../store/use.category.store";
-import CategoryList from "../components/CategoryList";
-import CategoryForm from "../components/FormCreateCategory/CategoryForm";
+import { useEffect, useState } from 'react'
+import { useCategoryStore } from '../store/use.category.store'
+import CategoryList from '../components/CategoryList'
+import CategoryForm from '../components/FormCreateCategory/CategoryForm'
 
 const CategoryListPage = () => {
   const { loadingAllCategories, allCategories, getAllCategories } =
-    useCategoryStore();
-  const [showForm, setShowForm] = useState(false);
+    useCategoryStore()
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    getAllCategories();
-  }, [getAllCategories]);
+    getAllCategories()
+  }, [getAllCategories])
 
   const handleToggleForm = () => {
-    setShowForm(!showForm);
-  };
+    setShowForm(!showForm)
+  }
 
   return (
-    <div className="page-container">
-      <div className="content-container">
+    <div className='page-container'>
+      <div className='content-container'>
         <h1>Categories</h1>
         <div className=''>
-          <button className='btn btn-outline-success btn-light' onClick={handleToggleForm}>Create Category</button>
+          <button
+            className='btn btn-outline-success btn-light'
+            onClick={handleToggleForm}
+          >
+            Create Category
+          </button>
         </div>
         <hr />
 
@@ -34,7 +39,7 @@ const CategoryListPage = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CategoryListPage;
+export default CategoryListPage

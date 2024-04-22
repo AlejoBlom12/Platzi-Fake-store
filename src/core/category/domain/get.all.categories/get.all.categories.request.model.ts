@@ -1,1 +1,1 @@
-export type IGetAllCategoriesRequest = {};
+export type IGetAllCategoriesRequest = {}

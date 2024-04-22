@@ -1,4 +1,4 @@
 export interface ICreateCategoryRequest {
-    name: string,
-    image: string
+  name: string
+  image: string
 }

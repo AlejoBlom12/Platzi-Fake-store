@@ -1,41 +1,42 @@
-import { useEffect, useState } from "react";
-import ProductList from "../components/ProductList";
-import { useProductsStore } from "../store/use.product.store";
-import ProductForm from "../components/FormCreateProduct/ProductForm";
-import "../css/product.list.css";
+import { useEffect, useState } from 'react'
+import ProductList from '../components/ProductList'
+import { useProductsStore } from '../store/use.product.store'
+import ProductForm from '../components/FormCreateProduct/ProductForm'
+import '../css/product.list.css'
+import { ProductsFilterForm } from '../components'
 
 const ProductListPage = () => {
   const { loadingPaginatedProducts, paginatedProducts, getPaginatedProducts } =
-    useProductsStore();
-  const [showForm, setShowForm] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const limit = 10;
+    useProductsStore()
+  const [showForm, setShowForm] = useState(false)
+  const [offset, setOffset] = useState(0)
+  const limit = 10
 
   useEffect(() => {
-    getPaginatedProducts(offset, limit);
-  }, [getPaginatedProducts, offset, limit]);
+    getPaginatedProducts(offset, limit)
+  }, [getPaginatedProducts, offset, limit])
 
   const handleToggleForm = () => {
-    setShowForm(!showForm);
-  };
+    setShowForm(!showForm)
+  }
 
   const loadNextPage = () => {
-    setOffset(offset + limit);
-  };
+    setOffset(offset + limit)
+  }
 
   const loadPreviousPage = () => {
     if (offset >= limit) {
-      setOffset(offset - limit);
+      setOffset(offset - limit)
     }
-  };
+  }
 
   return (
-    <div className="page-container">
-      <div className="content-container">
+    <div className='page-container'>
+      <div className='content-container'>
         <h1>Products</h1>
-        <div className="">
+        <div className=''>
           <button
-            className="btn btn-outline-success btn-light"
+            className='btn btn-outline-success btn-light'
             onClick={handleToggleForm}
           >
             Create Product
@@ -45,20 +46,22 @@ const ProductListPage = () => {
 
         {showForm && <ProductForm />}
 
+        <ProductsFilterForm />
+
         {loadingPaginatedProducts ? (
           <div>Loading...</div>
         ) : (
           <>
             <ProductList products={paginatedProducts || []} />
-            <div className="pagination-container mt-4 d-flex justify-content-between">
+            <div className='pagination-container mt-4 d-flex justify-content-between'>
               <button
-                className="btn btn-secondary btn-lg"
+                className='btn btn-secondary btn-lg'
                 onClick={loadPreviousPage}
               >
                 Previous
               </button>
               <button
-                className="btn btn-secondary btn-lg"
+                className='btn btn-secondary btn-lg'
                 onClick={loadNextPage}
               >
                 Next
@@ -68,7 +71,7 @@ const ProductListPage = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductListPage;
+export default ProductListPage
