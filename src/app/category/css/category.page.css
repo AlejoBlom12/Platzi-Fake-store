@@ -1,0 +1,24 @@
+.product-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.product-card {
+  margin: 10px;
+  max-width: 1050px;
+  padding: 10px;
+  background-color: rgb(206, 206, 206);
+  border: solid 2px;
+  border-color: black;
+}
+
+.product-row {
+  margin-bottom: 20px;
+}
+
+.product-description {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}

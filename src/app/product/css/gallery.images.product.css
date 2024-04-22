@@ -1,0 +1,31 @@
+.gallery-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image {
+  max-width: 500px;
+  margin-right: 5px;
+  border-color: aliceblue;
+  border: solid 3px;
+}
+
+.gallery-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+}
+
+.gallery-btn.prev {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery-btn.next {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}

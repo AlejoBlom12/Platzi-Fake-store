@@ -1,0 +1,28 @@
+.category-card-link {
+  text-decoration: none;
+}
+
+.category-card {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.category-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.category-card {
+  margin: 10px;
+  max-width: 1050px;
+  padding: 10px;
+  background-color: rgb(206, 206, 206);
+  border: solid 2px;
+  border-color: black;
+}
+
+.category-row {
+  margin-bottom: 20px;
+}

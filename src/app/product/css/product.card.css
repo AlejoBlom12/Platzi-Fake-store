@@ -1,0 +1,8 @@
+.product-card-link {
+  text-decoration: none;
+}
+
+.product-card-link:hover .product-card {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
