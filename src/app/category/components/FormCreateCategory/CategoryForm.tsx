@@ -1,7 +1,7 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { Resolver, useForm } from "react-hook-form";
-// import "../../css/create.product.form.css";
-import { defaultValues, IFormValuesC, schemaCategory } from "./models";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { IFormValuesC, schemaCategory, defaultValues } from "./models";
 import { useCreateCategoryStore } from "../../store/use.create.category.store";
 
 const CategoryForm = () => {
@@ -16,33 +16,39 @@ const CategoryForm = () => {
   });
 
   const { createCategory } = useCreateCategoryStore();
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (data: IFormValuesC) => {
+    setIsSubmitting(true);
     try {
-
       await createCategory({
         name: data.name,
         image: data.image,
       });
-      reset()
+      reset();
+      setError(null);
     } catch (error) {
-      console.error("Error creating Category:", error);
+      console.error("Error creating product:", error);
+      setError("No se ha podido crear la categoría");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div>
+      {error && <div className="error">{error}</div>}
       <h2>Create Category</h2>
-
-      <form  className="create-category-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="create-product-form">
         <div className="form-group">
           <label>
-            <strong>Name:</strong>
+            <strong>Nombre:</strong>
           </label>
           <input
             type="text"
             {...register("name")}
-            placeholder="Nombre aquí"
+            placeholder="Titulo aquí"
             className="large-input"
           />
           {errors.name && (
@@ -65,8 +71,7 @@ const CategoryForm = () => {
           )}
         </div>
 
-        <button type="submit">Create Category</button>
-        <button type="reset">Reset Camps</button>
+        <button type="submit" disabled={isSubmitting}>Create Category</button>
       </form>
       <hr />
     </div>

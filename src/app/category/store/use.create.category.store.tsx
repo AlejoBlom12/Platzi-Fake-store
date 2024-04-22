@@ -5,6 +5,7 @@ import { createCategoryUseCase } from "../../../core/category/application/create
 
 interface State {
   loadingCreateCategory: boolean;
+  categories: any[]; // Define el tipo adecuado para las categorías
   createCategory: (data: ICreateCategoryRequest) => Promise<void>;
 }
 
@@ -12,13 +13,18 @@ const createCategory = createCategoryUseCase(categoryRepository);
 
 export const useCreateCategoryStore = create<State>((set) => ({
   loadingCreateCategory: false,
+  categories: [], 
   createCategory: async (data) => {
     set({ loadingCreateCategory: true });
     try {
-      await createCategory(data);
+      const newCategory = await createCategory(data);
+      
+      set((state) => ({
+        loadingCreateCategory: false,
+        categories: [newCategory, ...state.categories],
+      }));
     } catch (err) {
       console.error(err);
-    } finally {
       set({ loadingCreateCategory: false });
     }
   },

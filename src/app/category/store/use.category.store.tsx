@@ -1,34 +1,44 @@
 import { create } from "zustand";
+import { ICreateCategoryRequest } from "../../../core/category/domain/create.category";
 import { IGetAllCategoriesResponse } from "../../../core/category/domain/get.all.categories";
-import { getAllCategoriesUseCase } from "../../../core/category/application/get.all.categories.use.case";
 import { categoryRepository } from "../../../core/category/infraestructura/category.repository";
+import { createCategoryUseCase } from "../../../core/category/application/create.category.use.case";
+import { getAllCategoriesUseCase } from "../../../core/category/application/get.all.categories.use.case";
 
 interface AllState {
   allCategories: IGetAllCategoriesResponse[] | null;
   loadingAllCategories: boolean;
-  getAllCategories: () => void;
 }
 
-const getAllCategories = getAllCategoriesUseCase(categoryRepository);
+interface AllActions {
+  getAllCategories: () => Promise<void>;
+  createCategory: (data: ICreateCategoryRequest) => Promise<void>;
+}
 
-export const useCategoryStore = create<AllState>((set) => ({
+const createCategoryUseCaseInstance = createCategoryUseCase(categoryRepository);
+const getAllCategoriesUseCaseInstance = getAllCategoriesUseCase(categoryRepository);
+
+export const useCategoryStore = create<AllState & AllActions>((set) => ({
   allCategories: null,
   loadingAllCategories: true,
   getAllCategories: async () => {
-    set({
-      loadingAllCategories: true,
-    });
+    set({ loadingAllCategories: true });
     try {
-      const data = await getAllCategories();
-      set({
-        allCategories: data,
-      });
+      const data = await getAllCategoriesUseCaseInstance();
+      set({ allCategories: data, loadingAllCategories: false });
     } catch (err) {
       console.error(err);
-    } finally {
-      set({
-        loadingAllCategories: false,
-      });
+      set({ loadingAllCategories: false });
+    }
+  },
+  createCategory: async (data) => {
+    try {
+      await createCategoryUseCaseInstance(data);
+      await set((state) => ({ ...state, loadingAllCategories: true }));
+      const updatedCategories = await getAllCategoriesUseCaseInstance();
+      set({ allCategories: updatedCategories, loadingAllCategories: false });
+    } catch (err) {
+      console.error(err);
     }
   },
 }));
