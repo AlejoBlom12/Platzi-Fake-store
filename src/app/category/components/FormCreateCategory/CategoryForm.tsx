@@ -7,27 +7,12 @@ import { useCreateCategoryStore } from '../../store/use.create.category.store'
 const CategoryForm = () => {
   const {
     register,
-    handleSubmit,
     reset,
     formState: { errors }
   } = useForm<IFormValuesC>({
     defaultValues,
     resolver: yupResolver(schemaCategory) as Resolver<IFormValuesC, any>
   })
-
-  const { createCategory } = useCreateCategoryStore()
-
-  const onSubmit = async (data: IFormValuesC) => {
-    try {
-      await createCategory({
-        name: data.name,
-        image: data.image
-      })
-      reset()
-    } catch (error) {
-      console.error('Error creating Category:', error)
-    }
-  }
 
   return (
     <div>
