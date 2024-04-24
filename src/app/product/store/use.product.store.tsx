@@ -10,6 +10,7 @@ import { productRepository } from "../../../core/product/infrastructure/product.
 import { IPagProductsResponse } from "../../../core/product/domain/pagination.product";
 import { getSingleProductUseCase } from "../../../core/product/application/get.single.product.use.case";
 import { getAllProductsUseCase } from "../../../core/product/application/get.all.products.use.case";
+import { filterProductsByTitleUseCase } from "../../../core/product/application/filters/filter.title.use.case";
 
 interface State {
   singleProduct: IGetSingleProductResponse | null;
@@ -25,11 +26,16 @@ interface AllState {
   paginatedProducts: IPagProductsResponse[] | null;
   loadingPaginatedProducts: boolean;
   getPaginatedProducts: (offset: number, limit: number) => void;
+
+  filteredProducts: IGetAllProductsResponse[] | null;
+  loadingFilteredProducts: boolean;
+  filterProductsByTitle: (title: string) => void;
 }
 
 const getProductById = getSingleProductUseCase(productRepository);
 const getAllProducts = getAllProductsUseCase(productRepository);
 const getPaginatedProducts = getPaginatedProductsUseCase(productRepository);
+const filterProductsByTitle = filterProductsByTitleUseCase(productRepository);
 
 export const useProductsStore = create<AllState>((set) => ({
   allProducts: null,
@@ -45,6 +51,7 @@ export const useProductsStore = create<AllState>((set) => ({
       set({ loadingAllProducts: false });
     }
   },
+
   paginatedProducts: null,
   loadingPaginatedProducts: true,
   getPaginatedProducts: async (offset, limit) => {
@@ -56,6 +63,20 @@ export const useProductsStore = create<AllState>((set) => ({
       console.error(error);
     } finally {
       set({ loadingPaginatedProducts: false });
+    }
+  },
+
+  filteredProducts: null,
+  loadingFilteredProducts: true,
+  filterProductsByTitle: async (title: string) => {
+    set({ loadingFilteredProducts: true });
+    try {
+      const data = await filterProductsByTitle(title);
+      set({ filteredProducts: data });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      set({ loadingFilteredProducts: false });
     }
   },
 }));

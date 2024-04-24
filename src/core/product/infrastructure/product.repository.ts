@@ -3,6 +3,8 @@ import { IProductRepository } from "../domain/product.repository.model";
 import { IGetAllProductsResponse } from "../domain/get.all.products/get.all.products.response.model";
 import { ICreateProductResponse } from "../domain/create.product";
 import { IPagProductsResponse } from "../domain/pagination.product";
+import { IUpdateProductResponse } from "../domain/update.product";
+import { IFilterProductsResponse } from "../domain/filters";
 
 const getSingleProduct: IProductRepository["getSingleProduct"] = async ({
   id,
@@ -64,12 +66,26 @@ const updateProduct: IProductRepository["updateProduct"] = async (
       `https://api.escuelajs.co/api/v1/products/${productId}`,
       request,
     );
-    return response.data as ICreateProductResponse;
+    return response.data as IUpdateProductResponse; 
   } catch (err) {
     console.error(err);
     throw new Error("Error al actualizar el producto");
   }
 };
+
+const filterProductsByTitle: IProductRepository["filterProductsByTitle"] =
+  async (request) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.escuelajs.co/api/v1/products/?title=${request.title}`
+      );
+      return data as IFilterProductsResponse[];
+    } catch (err) {
+      console.error(err);
+      throw new Error("Error al filtrar los productos por título");
+    }
+  };
+
 
 export const productRepository: IProductRepository = {
   getSingleProduct,
@@ -77,4 +93,5 @@ export const productRepository: IProductRepository = {
   createProduct,
   updateProduct,
   getPaginatedProducts,
+  filterProductsByTitle, 
 };

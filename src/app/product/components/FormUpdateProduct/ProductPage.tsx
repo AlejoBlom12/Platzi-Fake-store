@@ -1,16 +1,9 @@
-// ProductPage.tsx
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useProductStore } from "../store/use.product.store";
-import { IGetSingleProductRequest } from "../../../core/product/domain/get.single.product";
-import ProductImageGallery from "../components/GalleryImagesProduct";
-import "../css/product.page.css";
-import "../css/product.list.css";
-import Modal from "../components/FormUpdateProduct/modal/Modal.Update.Product";
-import UpdateProductForm from "../components/FormUpdateProduct/ProductUpdateForm";
+import { IGetSingleProductRequest } from "../../../../core/product/domain/get.single.product";
+import ProductImageGallery from "../GalleryImagesProduct";
 
-const ProductPage: React.FC = () => {
+export const ProductPage: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
   const { singleProduct, loadingProduct, getSingleProduct } = useProductStore();
   const navigate = useNavigate();
@@ -42,10 +35,6 @@ const ProductPage: React.FC = () => {
     url: image,
   }));
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <>
       <div className="product-container">
@@ -76,7 +65,7 @@ const ProductPage: React.FC = () => {
                 </button>
               </div>
               <div className="col-md-1 mt-3">
-                {productId && ( 
+                {productId && (
                   <button
                     className="btn btn-secondary"
                     onClick={() => setIsModalOpen(true)}
@@ -90,13 +79,19 @@ const ProductPage: React.FC = () => {
         </div>
       </div>
 
-      {productId && ( 
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} id={productId}>
-          <UpdateProductForm id={productId} closeModal={closeModal} />
+      {productId && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          id={productId}
+          closeModal={() => setIsModalOpen(false)}
+        >
+          <UpdateProductForm
+            id={productId}
+            closeModal={() => setIsModalOpen(false)}
+          />
         </Modal>
       )}
     </>
   );
 };
-
-export default ProductPage;
