@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ProductList from '../components/ProductList'
 import { useProductsStore } from '../store/use.product.store'
 import ProductForm from '../components/FormCreateProduct/ProductForm'
@@ -6,15 +6,15 @@ import '../css/product.list.css'
 import { ProductsFilterForm } from '../components'
 
 const ProductListPage = () => {
-  const { loadingPaginatedProducts, paginatedProducts, getPaginatedProducts } =
+  const { allProducts, loadingAllProducts } =
     useProductsStore()
   const [showForm, setShowForm] = useState(false)
   const [offset, setOffset] = useState(0)
   const limit = 10
 
-  useEffect(() => {
-    getPaginatedProducts(offset, limit)
-  }, [getPaginatedProducts, offset, limit])
+  // useEffect(() => {
+  //   getPaginatedProducts(offset, limit)
+  // }, [getPaginatedProducts, offset, limit])
 
   const handleToggleForm = () => {
     setShowForm(!showForm)
@@ -48,11 +48,11 @@ const ProductListPage = () => {
 
         <ProductsFilterForm />
 
-        {loadingPaginatedProducts ? (
+        {loadingAllProducts ? (
           <div>Loading...</div>
         ) : (
           <>
-            <ProductList products={paginatedProducts || []} />
+            <ProductList products={allProducts || []} />
             <div className='pagination-container mt-4 d-flex justify-content-between'>
               <button
                 className='btn btn-secondary btn-lg'

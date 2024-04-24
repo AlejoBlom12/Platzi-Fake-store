@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { IGetAllProductsResponse } from '../../../core/product/domain/get.all.products'
+import { IGetAllProductsRequest, IGetAllProductsResponse } from '../../../core/product/domain/get.all.products'
 import {
   IGetSingleProductRequest,
   IGetSingleProductResponse
@@ -20,7 +20,7 @@ interface State {
 interface AllState {
   allProducts: IGetAllProductsResponse[] | null
   loadingAllProducts: boolean
-  getAllProducts: () => void
+  getAllProducts: (body: IGetAllProductsRequest) => void
 
   paginatedProducts: IPagProductsResponse[] | null
   loadingPaginatedProducts: boolean
@@ -34,10 +34,10 @@ const getPaginatedProducts = getPaginatedProductsUseCase(productRepository)
 export const useProductsStore = create<AllState>((set) => ({
   allProducts: null,
   loadingAllProducts: true,
-  getAllProducts: async () => {
+  getAllProducts: async (body) => {
     set({ loadingAllProducts: true })
     try {
-      const data = await getAllProducts()
+      const data = await getAllProducts(body)
       set({ allProducts: data })
     } catch (error) {
       console.error(error)
