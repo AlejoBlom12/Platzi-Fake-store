@@ -9,12 +9,15 @@ import { ICreateProductRequest, ICreateProductResponse } from './create.product'
 import { IUpdateProductRequest, IUpdateProductResponse } from './update.product'
 
 import { IPagProductsResponse, IPagProdutRequest } from './pagination.product'
+import { IGetAllProductsRequest } from './get.all.products'
 
 export interface IProductRepository {
   getSingleProduct(
     body: IGetSingleProductRequest
   ): Promise<IGetSingleProductResponse>
-  getAllProducts(): Promise<IGetAllProductsResponse[]>
+  getAllProducts(
+    body: IGetAllProductsRequest
+  ): Promise<IGetAllProductsResponse[]>
   createProduct(request: ICreateProductRequest): Promise<ICreateProductResponse>
   updateProduct(
     productId: string,
