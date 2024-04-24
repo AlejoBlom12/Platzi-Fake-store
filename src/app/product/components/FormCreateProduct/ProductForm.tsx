@@ -48,7 +48,7 @@ const ProductForm = () => {
     <div>
       <h2>Create Product</h2>
 
-      <form className='create-product-form'>
+      <form onSubmit={() => handleSubmit(onSubmit)} className='create-product-form'>
         <div className='form-group'>
           <label>
             <strong>Title:</strong>
@@ -135,7 +135,7 @@ const ProductForm = () => {
           )}
         </div>
 
-        <button onSubmit={() => handleSubmit(onSubmit)}>Create Product</button>
+        <button type='submit'>Create Product</button>
       </form>
       <hr />
     </div>

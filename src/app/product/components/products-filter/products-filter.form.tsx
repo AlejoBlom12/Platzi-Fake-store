@@ -1,7 +1,13 @@
-import { useProductsFilterForm } from './hooks'
+import { useEffect } from 'react';
+import { useProductsFilterForm } from './hooks';
 
 export const ProductsFilterForm = () => {
-  const { methods } = useProductsFilterForm()
+  const { methods } = useProductsFilterForm();
+  const searchParams = useProductsFilterForm(); 
+
+  useEffect(() => {
+    
+  }, [searchParams]); 
 
   return (
     <form>
@@ -41,5 +47,5 @@ export const ProductsFilterForm = () => {
         type='number'
       />
     </form>
-  )
-}
+  );
+};

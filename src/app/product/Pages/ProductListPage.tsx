@@ -4,30 +4,18 @@ import { useProductsStore } from '../store/use.product.store'
 import ProductForm from '../components/FormCreateProduct/ProductForm'
 import '../css/product.list.css'
 import { ProductsFilterForm } from '../components'
+import PaginationProducts from '../components/products-filter/use.prodcuts-paginacion'
 
 const ProductListPage = () => {
   const { allProducts, loadingAllProducts } =
     useProductsStore()
   const [showForm, setShowForm] = useState(false)
-  const [offset, setOffset] = useState(0)
-  const limit = 10
 
-  // useEffect(() => {
-  //   getPaginatedProducts(offset, limit)
-  // }, [getPaginatedProducts, offset, limit])
+  const totalProducts = allProducts ? allProducts.length : 0; 
+  const productsPerPage = 10; 
 
   const handleToggleForm = () => {
     setShowForm(!showForm)
-  }
-
-  const loadNextPage = () => {
-    setOffset(offset + limit)
-  }
-
-  const loadPreviousPage = () => {
-    if (offset >= limit) {
-      setOffset(offset - limit)
-    }
   }
 
   return (
@@ -53,20 +41,8 @@ const ProductListPage = () => {
         ) : (
           <>
             <ProductList products={allProducts || []} />
-            <div className='pagination-container mt-4 d-flex justify-content-between'>
-              <button
-                className='btn btn-secondary btn-lg'
-                onClick={loadPreviousPage}
-              >
-                Previous
-              </button>
-              <button
-                className='btn btn-secondary btn-lg'
-                onClick={loadNextPage}
-              >
-                Next
-              </button>
-            </div>
+            {/* Pasa totalProducts y productsPerPage como propiedades */}
+            <PaginationProducts totalProducts={totalProducts} productsPerPage={productsPerPage} />
           </>
         )}
       </div>
