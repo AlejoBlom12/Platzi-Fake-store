@@ -1,6 +1,13 @@
 import { NavLink } from 'react-router-dom'
+import { useProductsFilterForm } from '../../product/components/products-filter/hooks'
+import { useEffect } from 'react'
 
 export const Navbar = () => {
+  const { methods } = useProductsFilterForm()
+  const searchParams = useProductsFilterForm()
+
+  useEffect(() => {}, [searchParams])
+
   return (
     <>
       <nav className='navbar navbar-expand-sm navbar-dark bg-dark p-2 fixed-top'>
@@ -34,9 +41,10 @@ export const Navbar = () => {
           role='search'
         >
           <input
+            {...methods.register('title')}
+            placeholder='Title'
             className='form-control me-2'
-            type='search'
-            placeholder='Search'
+            type='text'
             aria-label='Search'
           />
         </form>

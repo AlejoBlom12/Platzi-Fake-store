@@ -1,22 +1,18 @@
-import { useState } from 'react'
-import ProductList from '../components/ProductList'
-import { useProductsStore } from '../store/use.product.store'
-import ProductForm from '../components/FormCreateProduct/ProductForm'
-import '../css/product.list.css'
-import { ProductsFilterForm } from '../components'
-import PaginationProducts from '../components/products-filter/use.prodcuts-paginacion'
+import { useState } from 'react';
+import ProductList from '../components/ProductList';
+import { useProductsStore } from '../store/use.product.store';
+import ProductForm from '../components/FormCreateProduct/ProductForm';
+import '../css/product.list.css';
+import { ProductsFilterForm } from '../components'; 
+import PaginationProducts from '../components/products-filter/use.prodcuts-paginacion';
 
 const ProductListPage = () => {
-  const { allProducts, loadingAllProducts } =
-    useProductsStore()
-  const [showForm, setShowForm] = useState(false)
-
-  const totalProducts = allProducts ? allProducts.length : 0; 
-  const productsPerPage = 10; 
+  const { allProducts, loadingAllProducts } = useProductsStore();
+  const [showForm, setShowForm] = useState(false);
 
   const handleToggleForm = () => {
-    setShowForm(!showForm)
-  }
+    setShowForm(!showForm);
+  };
 
   return (
     <div className='page-container'>
@@ -41,13 +37,13 @@ const ProductListPage = () => {
         ) : (
           <>
             <ProductList products={allProducts || []} />
-            {/* Pasa totalProducts y productsPerPage como propiedades */}
-            <PaginationProducts totalProducts={totalProducts} productsPerPage={productsPerPage} />
           </>
         )}
+
+        <PaginationProducts /> 
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductListPage
+export default ProductListPage;

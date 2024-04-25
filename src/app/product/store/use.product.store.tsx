@@ -5,9 +5,7 @@ import {
   IGetSingleProductResponse
 } from '../../../core/product/domain/get.single.product'
 
-import { getPaginatedProductsUseCase } from '../../../core/product/application/pag.product.use.case'
 import { productRepository } from '../../../core/product/infrastructure/product.repository'
-import { IPagProductsResponse } from '../../../core/product/domain/pagination.product'
 import { getSingleProductUseCase } from '../../../core/product/application/get.single.product.use.case'
 import { getAllProductsUseCase } from '../../../core/product/application/get.all.products.use.case'
 
@@ -21,15 +19,11 @@ interface AllState {
   allProducts: IGetAllProductsResponse[] | null
   loadingAllProducts: boolean
   getAllProducts: (body: IGetAllProductsRequest) => void
-
-  paginatedProducts: IPagProductsResponse[] | null
-  loadingPaginatedProducts: boolean
-  getPaginatedProducts: (offset: number, limit: number) => void
 }
 
 const getProductById = getSingleProductUseCase(productRepository)
 const getAllProducts = getAllProductsUseCase(productRepository)
-const getPaginatedProducts = getPaginatedProductsUseCase(productRepository)
+
 
 export const useProductsStore = create<AllState>((set) => ({
   allProducts: null,
@@ -47,17 +41,6 @@ export const useProductsStore = create<AllState>((set) => ({
   },
   paginatedProducts: null,
   loadingPaginatedProducts: true,
-  getPaginatedProducts: async (offset, limit) => {
-    set({ loadingPaginatedProducts: true })
-    try {
-      const data = await getPaginatedProducts({ offset, limit })
-      set({ paginatedProducts: data })
-    } catch (error) {
-      console.error(error)
-    } finally {
-      set({ loadingPaginatedProducts: false })
-    }
-  }
 }))
 
 export const useProductStore = create<State>((set) => ({
