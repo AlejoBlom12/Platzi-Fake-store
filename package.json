@@ -11,22 +11,19 @@
     "format": "npx prettier . --write"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.4",
     "animate.css": "^4.1.1",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "bulma": "^1.0.0",
     "framer-motion": "^11.0.22",
-    "ldrs": "^1.0.1",
-    "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",
     "react-router-dom": "^6.22.3",
-    "sort-by": "^1.2.0",
     "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },

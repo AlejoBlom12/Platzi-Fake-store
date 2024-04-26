@@ -9,7 +9,7 @@
   margin: 10px;
   max-width: 1050px;
   padding: 10px;
-  background-color: rgb(206, 206, 206);
+  background-color: rgb(255, 255, 255);
   border: solid 2px;
   border-color: black;
 }
@@ -19,6 +19,12 @@
 }
 
 .product-description {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #000000;
   padding-top: 10px;
+  color: #000000;
+  font-size: 20px;
+}
+
+.description{
+  font-weight: bold;
 }

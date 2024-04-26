@@ -6,6 +6,10 @@
   margin-right: 20px;
 }
 
+.title {
+  box-shadow: 2px 2px 2px 1px rgb(0, 0, 0)
+}
+
 .content-container {
   width: 85%;
 }

@@ -1,14 +1,20 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import CategoryListPage from "../pages/CategoryListPage";
+import { Navigate, Route, Routes } from 'react-router-dom'
+import CategoryListPage from '../pages/CategoryListPage'
 
 export const AppRouter = () => {
   return (
     <>
       <Routes>
-        <Route path="/categories" element={<CategoryListPage />} />
+        <Route
+          path='/categories'
+          element={<CategoryListPage />}
+        />
 
-        <Route path="/" element={<Navigate to="/products" />} />
+        <Route
+          path='/'
+          element={<Navigate to='/products' />}
+        />
       </Routes>
     </>
-  );
-};
+  )
+}

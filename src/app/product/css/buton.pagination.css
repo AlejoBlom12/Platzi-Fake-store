@@ -1,0 +1,9 @@
+.filters-container {
+  position: relative;
+}
+
+.bottom-buttons {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}

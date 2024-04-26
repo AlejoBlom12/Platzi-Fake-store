@@ -1,30 +1,30 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
   extends: [
-    "standard-with-typescript",
-    "plugin:react/recommended",
-    "plugin:react/tsx-runtime",
+    'standard-with-typescript',
+    'plugin:react/recommended',
+    'plugin:react/tsx-runtime'
   ],
   overrides: [
     {
       env: {
-        node: true,
+        node: true
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: "script",
-      },
-    },
+        sourceType: 'script'
+      }
+    }
   ],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module'
   },
-  plugins: ["react"],
+  plugins: ['react'],
   rules: {
-    "no-unused-vars": "warn",
-  },
-};
+    'no-unused-vars': 'warn'
+  }
+}

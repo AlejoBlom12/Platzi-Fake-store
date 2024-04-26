@@ -1,3 +1,3 @@
 export type IGetSingleProductRequest = {
-  id: number;
-};
+  id: number
+}
