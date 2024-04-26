@@ -1,18 +1,18 @@
-import { useEffect } from "react";
+// Dentro del componente UpdateProductForm
+import  { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useUpdateProductStore } from "../../store/use.update.product.store";
-import { defaultUpdateProductValues } from "./models";
 import { yupResolver } from "@hookform/resolvers/yup";
 import updateProductSchema from "./models/form.update.model";
+import { IUpdateProductRequest } from "../../../../core/product/domain/update.product";
 
-const UpdateProductForm = ({ id, closeModal }: { id: string; closeModal: () => void }) => {
+const UpdateProductForm = ({ id, closeModal, currentProductData }: { id: string; closeModal: () => void; currentProductData: IUpdateProductRequest }) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: defaultUpdateProductValues,
     resolver: yupResolver(updateProductSchema),
   });
 
@@ -20,13 +20,13 @@ const UpdateProductForm = ({ id, closeModal }: { id: string; closeModal: () => v
 
   useEffect(() => {}, [id]);
 
-  const onSubmit = async (data: typeof defaultUpdateProductValues) => {
+  const onSubmit = async (data: IUpdateProductRequest) => {
     try {
       await updateProduct(id, data);
       alert("¡El producto se ha actualizado con éxito!");
 
       reset();
-      closeModal(); // Cierra la modal cuando se actualiza el producto correctamente
+      closeModal(); 
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -46,6 +46,7 @@ const UpdateProductForm = ({ id, closeModal }: { id: string; closeModal: () => v
             {...register("title")}
             placeholder="Title here"
             className="small-input" 
+            value={currentProductData.title} 
           />
           {errors.title && <strong className="error">{errors.title.message}</strong>}
         </div>
@@ -60,6 +61,7 @@ const UpdateProductForm = ({ id, closeModal }: { id: string; closeModal: () => v
             className="small-input" 
             placeholder="Price here"
             min="0"
+            value={currentProductData.price} 
           />
           {errors.price && <strong className="error">{errors.price.message}</strong>}
         </div>

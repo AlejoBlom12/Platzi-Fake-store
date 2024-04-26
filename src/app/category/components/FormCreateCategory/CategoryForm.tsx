@@ -3,6 +3,7 @@ import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IFormValuesC, schemaCategory, defaultValues } from "./models";
 import { useCreateCategoryStore } from "../../store/use.create.category.store";
+import { useNavigate } from "react-router-dom";
 
 const CategoryForm = () => {
   const {
@@ -15,6 +16,7 @@ const CategoryForm = () => {
     resolver: yupResolver(schemaCategory) as Resolver<IFormValuesC, any>,
   });
 
+  const navigate = useNavigate()
   const { createCategory } = useCreateCategoryStore();
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,6 +36,9 @@ const CategoryForm = () => {
     } finally {
       setIsSubmitting(false);
     }
+    window.alert('¡Producto creado con éxito!');
+    navigate("/categories")
+
   };
 
   return (
