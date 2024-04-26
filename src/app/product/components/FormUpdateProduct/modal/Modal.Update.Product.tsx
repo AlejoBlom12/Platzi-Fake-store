@@ -4,7 +4,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   id: string;
-  closeModal: () => void;
+  closeModal: () => void; 
   children?: React.ReactNode; 
 }
 

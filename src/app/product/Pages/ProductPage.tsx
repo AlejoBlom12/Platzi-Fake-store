@@ -76,7 +76,7 @@ const ProductPage: React.FC = () => {
                 </button>
               </div>
               <div className="col-md-1 mt-3">
-                {productId && ( 
+                {productId && (
                   <button
                     className="btn btn-secondary"
                     onClick={() => setIsModalOpen(true)}
@@ -90,9 +90,18 @@ const ProductPage: React.FC = () => {
         </div>
       </div>
 
-      {productId && ( 
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} id={productId}>
-          <UpdateProductForm id={productId} closeModal={closeModal} />
+      {productId && (
+        <Modal 
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          id={productId}
+          closeModal={closeModal} 
+        >
+          <UpdateProductForm
+            id={productId}
+            closeModal={closeModal}
+            currentProductData={singleProduct}
+          />
         </Modal>
       )}
     </>

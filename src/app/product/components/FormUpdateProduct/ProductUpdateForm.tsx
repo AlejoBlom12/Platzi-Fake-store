@@ -1,4 +1,3 @@
-// Dentro del componente UpdateProductForm
 import  { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useUpdateProductStore } from "../../store/use.update.product.store";
