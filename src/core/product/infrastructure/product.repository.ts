@@ -83,18 +83,6 @@ const updateProduct: IProductRepository["updateProduct"] = async (
   }
 };
 
-const filterProductsByTitle: IProductRepository["filterProductsByTitle"] =
-  async (request) => {
-    try {
-      const { data } = await axios.get(
-        `https://api.escuelajs.co/api/v1/products/?title=${request.title}`
-      );
-      return data as IFilterProductsResponse[];
-    } catch (err) {
-      console.error(err);
-      throw new Error("Error al filtrar los productos por título");
-    }
-  };
 
 
 export const productRepository: IProductRepository = {
