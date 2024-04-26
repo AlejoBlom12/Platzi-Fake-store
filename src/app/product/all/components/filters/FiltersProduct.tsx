@@ -4,7 +4,7 @@ import { useCategoryStore } from '../../../../category/store/use.category.store'
 import '../../../css/buton.pagination.css'
 
 export const Filters = () => {
-  const { methods, totalProducts } = useProductsFilterForm()
+  const { methods } = useProductsFilterForm()
   const { allCategories, loadingAllCategories, getAllCategories } =
     useCategoryStore()
 
