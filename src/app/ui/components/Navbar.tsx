@@ -10,9 +10,9 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className='navbar navbar-expand-sm navbar-dark bg-dark p-2 fixed-top'>
+      <nav className='navbar navbar-expand-sm navbar-dark p-2 fixed-top'>
         <div className='container-fluid'>
-          <a className='navbar-brand'>Shop</a>
+          <a className='navbar-brand'>Fake Store</a>
 
           <div className='navbar-collapse'>
             <div className='navbar-nav'>

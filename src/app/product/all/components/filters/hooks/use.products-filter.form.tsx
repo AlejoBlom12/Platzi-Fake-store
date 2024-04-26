@@ -15,12 +15,12 @@ export const useProductsFilterForm = () => {
   const [totalProducts, setTotalProducts] = useState(0); 
   
   useEffect(() => {
-    methods.setValue('offset', '1');
+    methods.setValue('offset', '1'); 
     onChange();
   }, []);
-
+  
   const { categoryId, offset, price_max, price_min, title } = methods.watch();
-  const limit = 8; 
+  const limit = 10; 
 
   const onChange = async () => {
     const params = new URLSearchParams();

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import defaultImage from '../../../../../../../assets/imagen-no-found.jpg' 
 import '../../../../../css/gallery.images.product.css'
 
 interface ProductImage {
@@ -21,13 +22,18 @@ const ProductImageGallery = ({ images }: { images: ProductImage[] }) => {
     )
   }
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.src = defaultImage 
+  }
+
   return (
-    <div className='gallery-container animate__headShake'>
+    <div className='gallery-container'>
       <img
         key={images[currentIndex].id}
         src={images[currentIndex].url}
         alt={`Imagen ${currentIndex}`}
         className='image'
+        onError={handleImageError} 
       />
       <button
         className='gallery-btn prev'

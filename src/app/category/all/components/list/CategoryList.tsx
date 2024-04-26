@@ -1,12 +1,12 @@
-import React from 'react'
-import CategoryCard from './CategoryCard'
-import { IGetAllCategoriesResponse } from '../../../core/category/domain/get.all.categories'
+
+import { IGetAllCategoriesResponse } from '../../../../../core/category/domain/get.all.categories'
+import CategoryCard from './components/card/CategoryCard'
 
 interface CategoryListProps {
   categories: IGetAllCategoriesResponse[] | null
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
+const CategoryList = ({ categories }: CategoryListProps) => {
   return (
     <div className='row rows-cols-1 row-cols-md-2 g-3'>
       {categories?.map((category) => (

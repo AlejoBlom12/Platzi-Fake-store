@@ -1,6 +1,6 @@
 import React from 'react'
-import { IGetAllCategoriesResponse } from '../../../core/category/domain/get.all.categories'
-import '../css/category.card.css'
+import '../../../../../css/category.card.css'
+import { IGetAllCategoriesResponse } from '../../../../../../../core/category/domain/get.all.categories'
 
 interface CategoryCardProps {
   category: IGetAllCategoriesResponse
@@ -8,8 +8,8 @@ interface CategoryCardProps {
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
   return (
-    <div className='col animate__animated animate__fadeIn mt-3'>
-      <div className='card text-dark bg-light mb-3 '>
+    <div className=' mt-3'>
+      <div className='card text-dark bg-light mb-3 product-card'>
         <div className='row no-gutters'>
           <div className='col-4'>
             <img
@@ -20,7 +20,12 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
           </div>
 
           <div className='col-8'>
-            <h3 className='card-title'>{category.name}</h3>
+            <h3
+              className='card-title'
+              style={{ fontSize: '1.25rem' }}
+            >
+              {category.name}
+            </h3>
           </div>
         </div>
       </div>

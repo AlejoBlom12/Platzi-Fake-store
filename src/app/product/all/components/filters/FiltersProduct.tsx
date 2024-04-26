@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useProductsFilterForm } from './hooks'
 import { useCategoryStore } from '../../../../category/store/use.category.store'
+import '../../../css/buton.pagination.css'
 
 export const Filters = () => {
   const { methods, totalProducts } = useProductsFilterForm()
@@ -25,20 +26,29 @@ export const Filters = () => {
     methods.setValue('offset', newOffset.toString())
   }
 
+  const handleNextPage = () => {
+    const currentOffset = parseInt(methods.getValues('offset') ?? '1')
+    const nextOffset = currentOffset + 10
+    handleOffsetChange(nextOffset)
+  }
+
+  const handlePreviusPage = () => {
+    let currentOffset = parseInt(methods.getValues('offset') ?? '1')
+    if (currentOffset > 1) {
+      currentOffset -= 10
+      handleOffsetChange(currentOffset)
+    }
+  }
+
   const handleFirstPage = () => {
     handleOffsetChange(1)
   }
 
-  const handleNextPage = () => {
-    const currentOffset = parseInt(methods.getValues('offset') ?? '1')
-    const nextOffset = currentOffset + 1
-    handleOffsetChange(nextOffset)
-  }
-
   return (
-    <>
+    <div className='filters-container'>
       <form>
-        <span style={{ color: 'black' }}>Filtrar por precio: </span>
+        <span style={{ color: 'white' }}>Filtrar por precio: </span>
+        <br />
         <input
           {...methods.register('price_min')}
           placeholder='Price min'
@@ -57,13 +67,14 @@ export const Filters = () => {
           onChange={handlePriceMaxChange}
         />
 
-        <div>
-          <span style={{ color: 'black' }}>Filtrar por categoría: </span>
+        <div className='mt-5'>
+          <span style={{ color: 'white' }}>Filter of category: </span>
+          <br />
           <select
             {...methods.register('categoryId')}
-            style={{ width: '200px', padding: '5px', margin: '3px' }}
+            style={{ width: '300px', padding: '5px', margin: '3px' }}
           >
-            <option value=''>Todas las categorías</option>
+            <option value=''>All categories</option>
             {loadingAllCategories ? (
               <option value=''>Loading...</option>
             ) : (
@@ -79,37 +90,43 @@ export const Filters = () => {
           </select>
         </div>
 
-        <div>
-          <span style={{ color: 'black' }}>Offset: </span>
-          <input
-            {...methods.register('offset')}
-            placeholder='Offset'
-            type='text'
-            style={{ width: '100px', padding: '5px', margin: '3px' }}
-            value={methods.getValues('offset')}
-            readOnly
-          />
-        </div>
-
         <hr />
       </form>
-      <button
-        onClick={handleFirstPage}
-        style={{ marginLeft: '5px' }}
-        disabled={parseInt(methods.getValues('offset') ?? '1') === 1}
-      >
-        First
-      </button>
-      <button
-        onClick={handleNextPage}
-        style={{ marginLeft: '5px' }}
-        disabled={
-          parseInt(methods.getValues('offset') ?? '1') ===
-          Math.ceil(totalProducts / 6)
-        }
-      >
-        Next
-      </button>
-    </>
+      <div>
+        <span style={{ color: 'white' }}>Page: </span>
+        <input
+          {...methods.register('offset')}
+          placeholder='Offset'
+          type='text'
+          style={{ width: '100px', padding: '5px', margin: '3px' }}
+          value={methods.getValues('offset')}
+          readOnly
+        />
+      </div>
+
+      <div className='bottom-buttons'>
+        <button
+          className='btn btn-light'
+          onClick={handleFirstPage}
+          style={{ width: '80px', height: '50px' }}
+        >
+          First
+        </button>
+        <button
+          className='btn btn-light'
+          onClick={handlePreviusPage}
+          style={{ marginLeft: '5px', width: '80px', height: '50px' }}
+        >
+          Previus
+        </button>
+        <button
+          className='btn btn-light'
+          onClick={handleNextPage}
+          style={{ marginLeft: '5px', width: '80px', height: '50px' }}
+        >
+          Next
+        </button>
+      </div>
+    </div>
   )
 }

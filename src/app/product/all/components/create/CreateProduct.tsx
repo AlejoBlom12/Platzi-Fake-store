@@ -3,6 +3,7 @@ import { defaultValues, IFormValues, schema } from "./models";
 import { useCategoryStore } from "../../../../category/store/use.category.store";
 import { useCreateProductStore } from "../../../store/use.create.product.store";
 import { Resolver, useForm } from "react-hook-form";
+import '../../../css/create.product.form.css'
 import { yupResolver } from "@hookform/resolvers/yup";
 
 export const Create = () => {
@@ -46,7 +47,9 @@ export const Create = () => {
   return (
     
     <>
-      <h2>Create Product</h2>
+    <div className="mb-2" style={{ fontSize: "1.25rem", marginLeft: "120px"}}>
+      <h2><strong>Create Product</strong></h2>
+    </div>
 
       <form
         className='create-product-form'

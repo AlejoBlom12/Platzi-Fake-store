@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Resolver, useForm } from 'react-hook-form'
 // import "../../css/create.product.form.css";
 import { defaultValues, IFormValuesC, schemaCategory } from './models'
-import { useCreateCategoryStore } from '../../store/use.create.category.store'
 
 const CategoryForm = () => {
   const {
