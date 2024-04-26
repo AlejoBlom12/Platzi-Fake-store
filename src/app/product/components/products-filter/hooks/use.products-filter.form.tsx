@@ -13,14 +13,20 @@ export const useProductsFilterForm = () => {
   });
 
   const [totalProducts, setTotalProducts] = useState(0); 
+  
+  useEffect(() => {
+    methods.setValue('offset', '1');
+    onChange();
+  }, []);
 
-  const { categoryId, limit, offset, price_max, price_min, title } = methods.watch();
+  const { categoryId, offset, price_max, price_min, title } = methods.watch();
+  const limit = 6; 
 
   const onChange = async () => {
     const params = new URLSearchParams();
 
     categoryId && params.append('categoryId', categoryId);
-    limit && params.append('limit', limit);
+    params.append('limit', limit.toString()); 
     offset && params.append('offset', offset);
     price_max && params.append('price_max', price_max);
     price_min && params.append('price_min', price_min);
@@ -31,7 +37,7 @@ export const useProductsFilterForm = () => {
 
   useEffect(() => {
     onChange();
-  }, [categoryId, limit, offset, price_max, price_min, title]);
+  }, [categoryId, offset, price_max, price_min, title]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -39,9 +45,7 @@ export const useProductsFilterForm = () => {
         categoryId: searchParams.get('categoryId')
           ? parseInt(searchParams.get('categoryId') || '0')
           : undefined,
-        limit: searchParams.get('limit')
-          ? parseInt(searchParams.get('limit') || '0')
-          : undefined,
+        limit: limit, 
         offset: searchParams.get('offset')
           ? parseInt(searchParams.get('offset') || '0')
           : undefined,

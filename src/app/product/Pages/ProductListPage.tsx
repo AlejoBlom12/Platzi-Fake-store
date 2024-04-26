@@ -4,7 +4,7 @@ import { useProductsStore } from '../store/use.product.store';
 import ProductForm from '../components/FormCreateProduct/ProductForm';
 import '../css/product.list.css';
 import { ProductsFilterForm } from '../components'; 
-import PaginationProducts from '../components/products-filter/use.prodcuts-paginacion';
+
 
 const ProductListPage = () => {
   const { allProducts, loadingAllProducts } = useProductsStore();
@@ -40,7 +40,6 @@ const ProductListPage = () => {
           </>
         )}
 
-        <PaginationProducts /> 
       </div>
     </div>
   );

@@ -1,28 +1,38 @@
-import { useEffect } from 'react'
-import { useProductsFilterForm } from './hooks'
-import { useCategoryStore } from '../../../category/store/use.category.store'
+import { useEffect } from 'react';
+import { useProductsFilterForm } from './hooks';
+import { useCategoryStore } from '../../../category/store/use.category.store';
 
 export const ProductsFilterForm = () => {
-  const { methods } = useProductsFilterForm()
-  const searchParams = useProductsFilterForm()
-  const { allCategories, loadingAllCategories, getAllCategories } =
-    useCategoryStore() // Obtener las categorías disponibles
+  const { methods, totalProducts } = useProductsFilterForm();
+  const { allCategories, loadingAllCategories, getAllCategories } = useCategoryStore();
 
   useEffect(() => {
-    getAllCategories() // Obtener todas las categorías al montar el componente
-  }, [])
-
-  useEffect(() => {}, [searchParams])
+    getAllCategories();
+  }, [getAllCategories]);
 
   const handlePriceMinChange = (e: any) => {
-    const newValue = e.target.value.replace(/[^0-9]/g, '')
-    methods.setValue('price_min', newValue)
-  }
+    const newValue = e.target.value.replace(/[^0-9]/g, '');
+    methods.setValue('price_min', newValue);
+  };
 
   const handlePriceMaxChange = (e: any) => {
-    const newValue = e.target.value.replace(/[^0-9]/g, '')
-    methods.setValue('price_max', newValue)
-  }
+    const newValue = e.target.value.replace(/[^0-9]/g, '');
+    methods.setValue('price_max', newValue);
+  };
+
+  const handleOffsetChange = (newOffset: number) => {
+    methods.setValue('offset', newOffset.toString());
+  };
+  
+  const handleFirstPage = () => {
+    handleOffsetChange(1);
+  };
+
+  const handleNextPage = () => {
+    const currentOffset = parseInt(methods.getValues('offset') ?? '1');
+    const nextOffset = currentOffset + 1;
+    handleOffsetChange(nextOffset);
+  };
 
   return (
     <form>
@@ -46,27 +56,50 @@ export const ProductsFilterForm = () => {
       />
 
       <div>
-        <span style={{ color: "black"}}>Filtrar por categoria: </span>
-        <select
-          {...methods.register('categoryId')}
-          style={{ width: '200px', padding: '5px', margin: '3px' }}
-        >
+        <span style={{ color: 'black' }}>Filtrar por categoría: </span>
+        <select {...methods.register('categoryId')} style={{ width: '200px', padding: '5px', margin: '3px' }}>
           <option value=''>Todas las categorías</option>
           {loadingAllCategories ? (
             <option value=''>Loading...</option>
           ) : (
             allCategories?.map((category) => (
-              <option
-                key={category.id}
-                value={category.id}
-              >
+              <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))
           )}
         </select>
       </div>
+
+      <div>
+        <span style={{ color: 'black' }}>Offset: </span>
+        <input
+          {...methods.register('offset')}
+          placeholder='Offset'
+          type='text'
+          style={{ width: '100px', padding: '5px', margin: '3px' }}
+          value={methods.getValues('offset')}
+          readOnly
+        />
+        <button
+          onClick={handleFirstPage}
+          style={{ marginLeft: '5px' }}
+          disabled={parseInt(methods.getValues('offset') ?? '1') === 1}
+        >
+          First
+        </button>
+        <button
+          onClick={handleNextPage}
+          style={{ marginLeft: '5px' }}
+          disabled={parseInt(methods.getValues('offset') ?? '1') === Math.ceil(totalProducts / 6)}
+        >
+          Next
+        </button>
+      </div>
+
       <hr />
     </form>
-  )
-}
+  );
+};
+
+export default ProductsFilterForm;
