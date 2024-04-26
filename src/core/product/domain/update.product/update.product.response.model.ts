@@ -1,5 +1,5 @@
 export interface IUpdateProductResponse {
-  productId: string
-  success: boolean
-  message?: string
+  id: string;
+  success: boolean;
+  message?: string;
 }

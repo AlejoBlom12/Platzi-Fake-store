@@ -3,6 +3,7 @@ import { IProductRepository } from '../domain/product.repository.model'
 import { IGetAllProductsResponse } from '../domain/get.all.products/get.all.products.response.model'
 import { ICreateProductResponse } from '../domain/create.product'
 import { IPagProductsResponse } from '../domain/pagination.product'
+import { IUpdateProductResponse } from '../domain/update.product'
 
 const getSingleProduct: IProductRepository['getSingleProduct'] = async ({
   id
@@ -66,21 +67,21 @@ const createProduct: IProductRepository['createProduct'] = async (request) => {
   }
 }
 
-const updateProduct: IProductRepository['updateProduct'] = async (
+const updateProduct: IProductRepository["updateProduct"] = async (
   productId,
-  request
+  request,
 ) => {
   try {
     const response = await axios.put(
       `https://api.escuelajs.co/api/v1/products/${productId}`,
-      request
-    )
-    return response.data as ICreateProductResponse
+      request,
+    );
+    return response.data as IUpdateProductResponse; 
   } catch (err) {
-    console.error(err)
-    throw new Error('Error al actualizar el producto')
+    console.error(err);
+    throw new Error("Error al actualizar el producto");
   }
-}
+};
 
 export const productRepository: IProductRepository = {
   getSingleProduct,

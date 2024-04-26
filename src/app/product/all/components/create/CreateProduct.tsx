@@ -5,6 +5,7 @@ import { useCreateProductStore } from "../../../store/use.create.product.store";
 import { Resolver, useForm } from "react-hook-form";
 import '../../../css/create.product.form.css'
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
 
 export const Create = () => {
   const {
@@ -17,6 +18,7 @@ export const Create = () => {
     resolver: yupResolver(schema) as Resolver<IFormValues, any>,
   });
 
+  const navigate = useNavigate();
   const { createProduct } = useCreateProductStore();
   const { allCategories, loadingAllCategories, getAllCategories } =
     useCategoryStore();
@@ -38,7 +40,11 @@ export const Create = () => {
         categoryId: data.categoryId,
         images: imagesArray,
       });
-      reset()
+
+      window.alert('¡Producto creado con éxito!');
+      
+      reset();
+      navigate("/");
     } catch (error) {
       console.error("Error creating product:", error);
     }

@@ -48,7 +48,7 @@ const CategoryForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="create-product-form">
         <div className="form-group">
           <label>
-            <strong>Nombre:</strong>
+            <strong>Name:</strong>
           </label>
           <input
             type="text"

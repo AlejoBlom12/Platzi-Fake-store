@@ -47,7 +47,7 @@ export const Filters = () => {
   return (
     <div className='filters-container'>
       <form>
-        <span style={{ color: 'white' }}>Filtrar por precio: </span>
+        <span style={{ color: 'white' }}>Filter of price: </span>
         <br />
         <input
           {...methods.register('price_min')}

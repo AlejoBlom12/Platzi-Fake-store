@@ -12,7 +12,7 @@ export const Navbar = () => {
     <>
       <nav className='navbar navbar-expand-sm navbar-dark p-2 fixed-top'>
         <div className='container-fluid'>
-          <a className='navbar-brand'>Fake Store</a>
+          <NavLink to="/" className='navbar-brand'>Fake Store</NavLink>
 
           <div className='navbar-collapse'>
             <div className='navbar-nav'>
