@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useUpdateProductStore } from "../../store/use.update.product.store";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,7 +45,7 @@ const UpdateProductForm = ({ id, closeModal, currentProductData }: { id: string;
             {...register("title")}
             placeholder="Title here"
             className="small-input" 
-            value={currentProductData.title} 
+            defaultValue={currentProductData.title} 
           />
           {errors.title && <strong className="error">{errors.title.message}</strong>}
         </div>
@@ -60,7 +60,7 @@ const UpdateProductForm = ({ id, closeModal, currentProductData }: { id: string;
             className="small-input" 
             placeholder="Price here"
             min="0"
-            value={currentProductData.price} 
+            defaultValue={currentProductData.price} 
           />
           {errors.price && <strong className="error">{errors.price.message}</strong>}
         </div>

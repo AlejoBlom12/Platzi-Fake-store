@@ -91,19 +91,19 @@ const ProductPage: React.FC = () => {
       </div>
 
       {productId && (
-        <Modal 
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          id={productId}
-          closeModal={closeModal} 
-        >
-          <UpdateProductForm
-            id={productId}
-            closeModal={closeModal}
-            currentProductData={singleProduct}
-          />
-        </Modal>
-      )}
+  <Modal
+    isOpen={isModalOpen}
+    onClose={() => setIsModalOpen(false)}
+    id={productId}
+    closeModal={closeModal}
+  >
+    <UpdateProductForm
+      id={productId}
+      closeModal={closeModal}
+      currentProductData={singleProduct} 
+    />
+  </Modal>
+)}
     </>
   );
 };
