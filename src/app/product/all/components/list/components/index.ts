@@ -1,1 +1,2 @@
-export * from './card/card'
+export * from './card/ProductCard'
+export * from './galleryImgs/GalleryImagesProduct'

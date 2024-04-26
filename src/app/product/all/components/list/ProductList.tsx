@@ -1,12 +1,12 @@
-import React from 'react'
-import ProductCard from './ProductCard'
-import { IGetAllProductsResponse } from '../../../core/product/domain/get.all.products'
+
+import { IGetAllProductsResponse } from '../../../../../core/product/domain/get.all.products'
+import ProductCard from './components/card/ProductCard'
 
 interface ProductListProps {
   products: IGetAllProductsResponse[] | null
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products }) => {
+const List= ({ products }: ProductListProps) => {
   return (
     <div className='row rows-cols-1 row-cols-md-2 g-3'>
       {products?.map((product) => (
@@ -19,4 +19,4 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
   )
 }
 
-export default ProductList
+export default List

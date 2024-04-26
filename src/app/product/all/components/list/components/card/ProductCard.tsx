@@ -1,7 +1,7 @@
 import React from 'react'
-import { IGetAllProductsResponse } from '../../../core/product/domain/get.all.products'
 import { Link } from 'react-router-dom'
-import '../css/product.card.css'
+import '../../../../../css/product.card.css'
+import { IGetAllProductsResponse } from '../../../../../../../core/product/domain/get.all.products'
 
 interface ProductCardProps {
   product: IGetAllProductsResponse

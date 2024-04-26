@@ -2,9 +2,9 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { Navbar } from '../ui/components/Navbar'
 import CategoryListPage from '../category/pages/CategoryListPage'
-import ProductListPage from '../product/Pages/ProductListPage'
 import ProductPage from '../product/Pages/ProductPage'
 import ProductsAllPage from '../product/all'
+import ProductListPage from '../product/Pages/ProductListPage'
 
 export const AppRouter = () => {
   return (

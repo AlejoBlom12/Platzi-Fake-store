@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { IGetAllProductsRequest } from "../../../../../core/product/domain/get.all.products";
 import { defaultValues, IFormValues } from "../model";
-import { useProductsStore } from "../../../store/use.product.store";
 import { useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useProductsStore } from "../../../../store/use.product.store";
+import { IGetAllProductsRequest } from "../../../../../../core/product/domain/get.all.products";
 
 export const useProductsFilterForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +20,7 @@ export const useProductsFilterForm = () => {
   }, []);
 
   const { categoryId, offset, price_max, price_min, title } = methods.watch();
-  const limit = 6; 
+  const limit = 8; 
 
   const onChange = async () => {
     const params = new URLSearchParams();

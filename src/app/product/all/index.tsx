@@ -1,32 +1,20 @@
-import { useSearchParams } from 'react-router-dom'
-import { Create, Filters, List } from './components'
+import List from './components/list/ProductList'
+import { useProductsStore } from '../store/use.product.store';
 
 const ProductsAllPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const { allProducts, loadingAllProducts } = useProductsStore();
 
-  const handleParams = () => {
-    const params = new URLSearchParams(searchParams)
-
-    params.set('key', 'value')
-    params.set('page', '2')
-
-    setSearchParams(params)
-  }
+  
 
   return (
     <div className='mt-5'>
-      <div>
-        <h1>Params</h1>
-        <div>Key: {searchParams.get('key')}</div>
-        <div>Page: {searchParams.get('page')}</div>
-      </div>
-
-      <hr />
-
-      <Create />
-      <Filters />
-      <List />
-      <button onClick={handleParams}>Change Params</button>
+      {loadingAllProducts ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <List products={allProducts || []} />
+          </>
+        )}
     </div>
   )
 }

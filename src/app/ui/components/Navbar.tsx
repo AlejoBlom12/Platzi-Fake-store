@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
-import { useProductsFilterForm } from '../../product/components/products-filter/hooks'
 import { useEffect } from 'react'
+import { useProductsFilterForm } from '../../product/all/components/filters/hooks'
 
 export const Navbar = () => {
   const { methods } = useProductsFilterForm()

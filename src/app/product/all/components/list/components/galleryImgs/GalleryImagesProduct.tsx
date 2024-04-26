@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '../css/gallery.images.product.css'
+import '../../../../../css/gallery.images.product.css'
 
 interface ProductImage {
   id: number

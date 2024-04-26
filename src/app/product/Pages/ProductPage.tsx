@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useProductStore } from '../store/use.product.store'
 import { IGetSingleProductRequest } from '../../../core/product/domain/get.single.product'
-import ProductImageGallery from '../components/GalleryImagesProduct'
 import '../css/product.page.css'
-import '../css/product.list.css'
+import ProductImageGallery from '../all/components/list/components/galleryImgs/GalleryImagesProduct'
 
 const ProductPage: React.FC = () => {
   const { productId } = useParams<{ productId: string }>()

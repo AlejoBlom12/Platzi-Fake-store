@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import ProductList from '../components/ProductList';
-import { useProductsStore } from '../store/use.product.store';
-import ProductForm from '../components/FormCreateProduct/ProductForm';
 import '../css/product.list.css';
-import { ProductsFilterForm } from '../components'; 
+import { Create, Filters } from '../all/components';
+import ProductsAllPage from '../all';
 
 
 const ProductListPage = () => {
-  const { allProducts, loadingAllProducts } = useProductsStore();
   const [showForm, setShowForm] = useState(false);
 
   const handleToggleForm = () => {
@@ -16,6 +13,7 @@ const ProductListPage = () => {
 
   return (
     <div className='page-container'>
+          <Filters />
       <div className='content-container'>
         <h1>Products</h1>
         <div className=''>
@@ -28,17 +26,10 @@ const ProductListPage = () => {
         </div>
         <hr />
 
-        {showForm && <ProductForm />}
+        {showForm && <Create />}
 
-        <ProductsFilterForm />
-
-        {loadingAllProducts ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <ProductList products={allProducts || []} />
-          </>
-        )}
+        <ProductsAllPage />
+     
 
       </div>
     </div>
